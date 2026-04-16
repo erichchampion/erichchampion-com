@@ -1,0 +1,25 @@
+Name: Erich Champion
+Title: Senior Engineering Manager
+Tagline: 20+ years at Adobe building platforms used by millions. Now building iOS apps, writing technical books, and contributing to open source.
+Bio: With over two decades of experience at Adobe, I've led teams responsible for large-scale platforms serving millions of users worldwide. My work has spanned Learn/Support systems (2M+ pages, 64 locales), the Dexter platform powering AEM, and the Creative Cloud Plan Recommender — an ML-powered 0→1 product launch. Since leaving Adobe, I've channeled my energy into independent development, creating iOS apps and technical books.
+
+Job1_Title: Senior Engineering Manager
+Job1_Company: Adobe
+Job1_Start: 2020
+Job1_Current: true
+Job1_Description: Leading platform and product engineering teams.
+Job1_Highlights: Led Creative Cloud Plan Recommender - ML-powered 0→1 product launch|Managed Dexter platform team (AEM foundation)|Drove AI/ML integration initiatives across product lines
+
+Job2_Title: Engineering Manager
+Job2_Company: Adobe
+Job2_Start: 2015
+Job2_End: 2020
+Job2_Description: Led teams responsible for Learn and Support systems.
+Job2_Highlights: Scaled Learn/Support platform to 2M+ pages across 64 locales|Reduced page load times by 40% through architectural improvements|Built team from 8 to 25 engineers
+
+Job3_Title: Staff Software Engineer
+Job3_Company: Adobe
+Job3_Start: 2010
+Job3_End: 2015
+Job3_Description: Technical leadership on core platform teams.
+Job3_Highlights: Architected microservices migration for legacy systems|Led cross-functional initiatives spanning 5 engineering teams|Mentored senior engineers and defined technical standards

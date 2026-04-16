@@ -1,0 +1,5 @@
+Title: Inside OpenCode
+Description: Technical breakdown of OpenCode, the AI coding agent built for the terminal. Architecture, implementation details, and extension points.
+Link: https://amazon.com/your-book
+GitHubRepo: erichchampion/opencode
+Featured: false

@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+:root {
+  --solarized-base03: #002b36;
+  --solarized-base02: #073642;
+  --solarized-base01: #586e75;
+  --solarized-base00: #657b83;
+  --solarized-base0: #839496;
+  --solarized-base1: #93a1a1;
+  --solarized-base2: #eee8d5;
+  --solarized-base3: #fdf6e3;
+  --solarized-yellow: #b58900;
+  --solarized-orange: #cb4b16;
+  --solarized-red: #dc322f;
+  --solarized-magenta: #d33682;
+  --solarized-violet: #6c71c4;
+  --solarized-blue: #268bd2;
+  --solarized-cyan: #2aa198;
+  --solarized-green: #859900;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--solarized-base03);
+    --foreground: var(--solarized-base2);
+    --muted: var(--solarized-base01);
+    --accent: var(--solarized-cyan);
+    --accent-hover: var(--solarized-blue);
+    --border: var(--solarized-base01);
+    --surface: var(--solarized-base02);
+    --surface-hover: var(--solarized-base01);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--solarized-base3);
+    --foreground: var(--solarized-base00);
+    --muted: var(--solarized-base01);
+    --accent: var(--solarized-blue);
+    --accent-hover: var(--solarized-cyan);
+    --border: var(--solarized-base1);
+    --surface: var(--solarized-base2);
+    --surface-hover: var(--solarized-base1);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}

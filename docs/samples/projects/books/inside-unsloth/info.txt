@@ -1,0 +1,5 @@
+Title: Inside Unsloth
+Description: Deep dive into how Unsloth, the fastest LLM fine-tuning library, works. Technical exploration of optimization techniques and architecture.
+Link: https://amazon.com/your-book
+GitHubRepo: erichchampion/unsloth
+Featured: false

@@ -1,0 +1,5 @@
+Title: Building AI Coding Assistants
+Description: A comprehensive guide to building AI coding assistants, from architecture to implementation. Covers LLM integration, tool use, and production deployment.
+Link: https://amazon.com/your-book
+GitHubRepo: erichchampion/ollama-code-book
+Featured: true

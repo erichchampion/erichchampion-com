@@ -1,0 +1,5 @@
+Title: Sessions-AI
+Description: On-device AI chat with MCP server integration. Privacy-focused AI conversations powered by local models with seamless server connectivity.
+Link: https://apps.apple.com/your-app-id
+GitHubRepo: erichchampion/sessions-ai
+Featured: true
