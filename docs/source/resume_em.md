@@ -1,5 +1,5 @@
 # Erich Champion
-Scotts Valley, CA | 408.821.1563 | resume@erichchampion.com | linkedin.com/in/erichchampion
+Scotts Valley, CA | 408.821.1563 | resume@erichchampion.com | linkedin.com/in/erich-champion
 
 ---
 

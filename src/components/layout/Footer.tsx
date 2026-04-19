@@ -56,7 +56,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://linkedin.com/in/erichchampion"
+                  href="https://linkedin.com/in/erich-champion"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
