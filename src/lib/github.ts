@@ -16,20 +16,27 @@ interface GithubApiRepo {
 
 export async function fetchGithubRepos(usernames: string[]): Promise<GithubRepo[]> {
   const repos: GithubRepo[] = [];
+  const token = process.env.GITHUB_TOKEN;
 
   for (const username of usernames) {
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github.v3+json",
+    };
+    if (token) {
+      headers.Authorization = `token ${token}`;
+    }
+
     const response = await fetch(
       `https://api.github.com/users/${username}/repos?sort=updated&per_page=50`,
       {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-        },
+        headers,
         next: { revalidate: 3600 },
       }
     );
 
     if (!response.ok) {
-      console.error(`Failed to fetch repos for ${username}: ${response.status}`);
+      const errorBody = await response.text();
+      console.error(`Failed to fetch repos for ${username}: ${response.status} - ${errorBody}`);
       continue;
     }
 
