@@ -27,7 +27,7 @@ This guide walks through setting up Google Cloud Platform (GCP) so that your per
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
 2. Sign in with a Google account
 3. Click the project dropdown at the top → **New Project**
-4. Enter a project name: `erichchampion-site` (or any name you prefer)
+4. Enter a project name: `erichchampion-com` (or any name you prefer)
 5. Click **Create**
 6. Select the new project from the dropdown
 
@@ -48,14 +48,14 @@ A Service Account is a special Google identity that your website uses to access 
 1. Go to **APIs & Services** → **Credentials**
 2. Click **+ Create Credentials** → **Service Account**
 3. Fill in:
-   - **Service account name:** `erichchampion-reader`
+   - **Service account name:** `erichchampion-com-reader`
    - **Description:** `Read-only access to website content in Google Drive`
 4. Click **Create and Continue**
 5. Skip the next two steps (click **Continue**, then **Done**)
 
 Copy the service account email — it looks like:
 ```
-erichchampion-reader@your-project.iam.gserviceaccount.com
+erichchampion-com-reader@your-project.iam.gserviceaccount.com
 ```
 
 ---
