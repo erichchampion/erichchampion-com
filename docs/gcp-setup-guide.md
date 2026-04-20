@@ -175,3 +175,44 @@ See the [Content Authoring Guide](content-authoring-guide.md) for `info.txt` for
 - Field names must be single words (no spaces before colon)
 - Field names are case-insensitive
 - Values can span multiple lines until the next `Key:` line
+
+### "ERR_OSSL_UNSUPPORTED" or "DECODER routines::unsupported"
+This error occurs because Node.js 25+ uses OpenSSL 3.x, which has stricter requirements for RSA key formats. The Google Drive authentication will fail with this error.
+
+**Solution:** Use Node.js 22.x instead of Node.js 25+.
+
+On macOS with Homebrew:
+```bash
+# Install Node.js 22
+brew install node@22
+brew link node@22 --force
+
+# Verify version
+node -v  # Should show v22.x.x
+```
+
+Then restart your dev server or rebuild:
+```bash
+npm run build && npm run start
+```
+
+If you're using nvm, fnm, or another version manager, switch to Node.js 22:
+```bash
+nvm install 22
+nvm use 22
+```
+
+---
+
+### Node.js Version Requirement
+
+**Required: Node.js 22.x**
+
+This project uses the Google Drive API to fetch content at runtime. Node.js 25+ has an incompatibility with the OpenSSL 3.x library that causes RSA key decryption to fail when using the `googleapis` library with service account credentials.
+
+The error manifests as:
+```
+Error: error:1E08010C:DECODER routines::unsupported
+```
+
+This is a known issue with Node.js 25+ when using older RSA key formats. The solution is to use Node.js 22.x, which has better backwards compatibility with the key formats used by Google Cloud service accounts.
