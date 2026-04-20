@@ -2,6 +2,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RepoCard } from "@/components/github/RepoCard";
 import { fetchGithubRepos } from "@/lib/github";
 
+export const revalidate = 3600;
+
 export default async function GithubPage() {
   const repos = await fetchGithubRepos(["erichchampion"]);
 

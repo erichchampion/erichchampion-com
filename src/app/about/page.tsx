@@ -2,7 +2,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WorkHistory } from "@/components/about/WorkHistory";
 import { fetchAbout } from "@/lib/drive";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function AboutPage() {
   const about = await fetchAbout();

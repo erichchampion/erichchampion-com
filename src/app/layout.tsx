@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -16,6 +29,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: "Erich Champion",
   },
+  other: {
+    "dns-prefetch": "https://api.github.com",
+    "preconnect": "https://fonts.gstatic.com",
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
         <Header />
         <main className="flex-1">{children}</main>

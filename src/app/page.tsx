@@ -6,7 +6,7 @@ import { fetchGithubRepos } from "@/lib/github";
 import { fetchAbout, fetchProjects } from "@/lib/drive";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const [about, projects, repos] = await Promise.all([

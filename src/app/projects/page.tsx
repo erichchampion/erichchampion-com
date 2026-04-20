@@ -3,7 +3,7 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { fetchProjects } from "@/lib/drive";
 import type { Project } from "@/lib/types";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function ProjectsPage({
   searchParams,
