@@ -1,56 +1,12 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WorkHistory } from "@/components/about/WorkHistory";
-import type { Job } from "@/lib/types";
+import { fetchAbout } from "@/lib/drive";
 
-const mockAbout = {
-  name: "Erich Champion",
-  title: "Senior Engineering Manager",
-  tagline: "20+ years at Adobe building platforms used by millions. Now building iOS apps, writing technical books, and contributing to open source.",
-  bio: "With over two decades of experience at Adobe, I've led teams responsible for large-scale platforms serving millions of users worldwide. My work has spanned Learn/Support systems (2M+ pages, 64 locales), the Dexter platform powering AEM, and the Creative Cloud Plan Recommender - an ML-powered 0→1 product launch. Since leaving Adobe, I've channeled my energy into independent development, creating iOS apps and technical books.",
-  jobs: [
-    {
-      title: "Senior Engineering Manager",
-      company: "Adobe",
-      startDate: "2020",
-      current: true,
-      description: "Leading platform and product engineering teams.",
-      highlights: [
-        "Led Creative Cloud Plan Recommender - ML-powered 0→1 product launch",
-        "Managed Dexter platform team (AEM foundation)",
-        "Drove AI/ML integration initiatives across product lines",
-      ],
-    },
-    {
-      title: "Engineering Manager",
-      company: "Adobe",
-      startDate: "2015",
-      endDate: "2020",
-      current: false,
-      description: "Led teams responsible for Learn and Support systems.",
-      highlights: [
-        "Scaled Learn/Support platform to 2M+ pages across 64 locales",
-        "Reduced page load times by 40% through architectural improvements",
-        "Built team from 8 to 25 engineers",
-      ],
-    },
-    {
-      title: "Staff Software Engineer",
-      company: "Adobe",
-      startDate: "2010",
-      endDate: "2015",
-      current: false,
-      description: "Technical leadership on core platform teams.",
-      highlights: [
-        "Architected microservices migration for legacy systems",
-        "Led cross-functional initiatives spanning 5 engineering teams",
-        "Mentored senior engineers and defined technical standards",
-      ],
-    },
-  ] as Job[],
-};
+export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
-  const about = mockAbout;
+  const about = await fetchAbout();
+  if (!about) return null;
 
   return (
     <section className="pt-32 pb-20 px-6">

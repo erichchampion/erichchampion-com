@@ -3,18 +3,26 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { RepoCard } from "@/components/github/RepoCard";
 import { fetchGithubRepos } from "@/lib/github";
+import { fetchAbout, fetchProjects } from "@/lib/drive";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
-  const repos = await fetchGithubRepos(["erichchampion"]);
+  const [about, projects, repos] = await Promise.all([
+    fetchAbout(),
+    fetchProjects(),
+    fetchGithubRepos(["erichchampion"]),
+  ]);
   const featuredRepos = repos.slice(0, 6);
+  const featuredProjects = projects.filter((p) => p.featured).slice(0, 6);
 
   return (
     <>
       <Hero
-        name="Erich Champion"
-        title="Senior Engineering Manager | Platform & Product Engineering | AI/ML Integration"
-        tagline="20+ years at Adobe building platforms used by millions. Now building iOS apps, writing technical books, and contributing to open source."
+        name={about?.name || "Erich Champion"}
+        title={about?.title || ""}
+        tagline={about?.tagline || ""}
       />
 
       <section id="projects" className="py-20 px-6 bg-[var(--surface)]">
@@ -24,28 +32,9 @@ export default async function HomePage() {
             subtitle="Books and apps I've written and released"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProjectCard
-              project={{
-                slug: "sessions-ai",
-                title: "Sessions-AI",
-                description: "On-device AI chat with MCP server integration. Privacy-focused AI conversations powered by local models.",
-                type: "app",
-                link: "https://apps.apple.com",
-                githubRepo: "erichchampion/sessions-ai",
-                featured: true,
-              }}
-            />
-            <ProjectCard
-              project={{
-                slug: "building-ai-coding-assistants",
-                title: "Building AI Coding Assistants",
-                description: "A comprehensive guide to building AI coding assistants, from architecture to implementation.",
-                type: "book",
-                link: "https://example.com/book",
-                githubRepo: "erichchampion/ollama-code-book",
-                featured: true,
-              }}
-            />
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
           </div>
           <div className="mt-8 text-center">
             <Link
