@@ -3,23 +3,51 @@ Title: Senior Engineering Manager
 Tagline: 20+ years at Adobe building platforms used by millions. Now building iOS apps, writing technical books, and contributing to open source.
 Bio: With over two decades of experience at Adobe, I've led teams responsible for large-scale platforms serving millions of users worldwide. My work has spanned Learn/Support systems (2M+ pages, 64 locales), the Dexter platform powering AEM, and the Creative Cloud Plan Recommender — an ML-powered 0→1 product launch. Since leaving Adobe, I've channeled my energy into independent development, creating iOS apps and technical books.
 
-Job1_Title: Senior Engineering Manager
-Job1_Company: Adobe
-Job1_Start: 2020
-Job1_Current: true
-Job1_Description: Leading platform and product engineering teams.
-Job1_Highlights: Led Creative Cloud Plan Recommender - ML-powered 0→1 product launch|Managed Dexter platform team (AEM foundation)|Drove AI/ML integration initiatives across product lines
+Job1_Title: Independent Software Developer
+Job1_Company: Self-employed
+Job1_Start: 2024
+Job1_End: Present
+Job1_Description: Shipped seven iOS/macOS apps to the App Store and authored three technical books on AI systems and LLM tooling while consulting on platform engineering and AI tooling.
+Job1_Highlights: Shipped Sessions-AI — on-device LLM chat with MCP server integration and multi-model support|Shipped ElectroSpotmatic and SpotmaticMagic — professional iOS cameras supporting RAW/ProRAW, HDR video, focus stacking, and astrophotography|Shipped Sell in May — on-device LSTM market analysis and regime-aware pattern matching using llama.cpp|Published three technical books: Building AI Coding Assistants, Inside Unsloth, and Inside OpenCode|Built and open-sourced Defroster — a decentralized ICE activity reporting platform deployable by any community organization
 
-Job2_Title: Engineering Manager
+Job2_Title: Senior Engineering Manager, Interactive Experiences
 Job2_Company: Adobe
-Job2_Start: 2015
-Job2_End: 2020
-Job2_Description: Led teams responsible for Learn and Support systems.
-Job2_Highlights: Scaled Learn/Support platform to 2M+ pages across 64 locales|Reduced page load times by 40% through architectural improvements|Built team from 8 to 25 engineers
+Job2_Start: 2023
+Job2_End: 2024
+Job2_Description: Led 0→1 launch of AI-powered customer experiences on Adobe Edge Delivery Services, including the Creative Cloud Plan Recommender, serving millions of users worldwide.
+Job2_Highlights: Owned full program lifecycle — product stories, schedules, and quarterly roadmap presentations to VPs of Marketing and Engineering|Launched Creative Cloud Plan Recommender integrating ML APIs for personalized content recommendations, measurably improving conversion rates|Architected dual-interface authoring platform using React Flow and spreadsheet-driven JSON supporting both rapid prototypers and enterprise users|Delivered 95+ PageSpeed scores and sub-2-second LCP across all customer touchpoints
 
-Job3_Title: Staff Software Engineer
+Job3_Title: Senior Engineering Manager, Engineering Excellence
 Job3_Company: Adobe
-Job3_Start: 2010
-Job3_End: 2015
-Job3_Description: Technical leadership on core platform teams.
-Job3_Highlights: Architected microservices migration for legacy systems|Led cross-functional initiatives spanning 5 engineering teams|Mentored senior engineers and defined technical standards
+Job3_Start: 2020
+Job3_End: 2023
+Job3_Description: Led enterprise CI/CD transformation and unified search platform across Adobe's Web Team, coordinating development, QE automation, and release engineering on the Dexter AEM platform.
+Job3_Highlights: Authored product stories, maintained program schedules, and presented quarterly roadmaps to VPs of Marketing and Engineering|Replaced dozens of siloed search implementations with a single React + Elasticsearch platform serving millions of customer queries|Directed company-wide DevOps transformation integrating CI/CD and QA automation across adobe.com|Led OneTrust privacy compliance program coordinating legal, engineering, and design to meet global regulatory requirements
+
+Job4_Title: Senior Engineering Manager, Learn and Support Platform
+Job4_Company: Adobe
+Job4_Start: 2011
+Job4_End: 2020
+Job4_Description: Built and scaled Adobe's centralized Learn and Support Platform engineering organization, delivering 2M+ pages across 64 locales with 99.99% uptime on AEM.
+Job4_Highlights: Owned full program lifecycle — product stories, schedules, vendor budgets, and quarterly roadmap presentations to VPs of Marketing and Engineering|Scaled engineering org from a small team to 30+ engineers, quadrupling capacity through recruiting, mentorship, and internal promotion|Managed international vendor relationships and budgets across China, India, and Europe through end-to-end RFP processes|Reduced operational costs by millions via DITA-based architecture enabling platform redesigns without content migration|Implemented ML algorithms for automatic content tagging and metadata enforcement — Adobe's first intelligent content management workflow
+
+Job5_Title: Senior Engineering Manager, Dexter Platform
+Job5_Company: Adobe
+Job5_Start: 2016
+Job5_End: 2017
+Job5_Description: 0→1 platform launch: assembled a new team from scratch by selecting the best engineers from existing Adobe teams, built a fresh codebase, and delivered Adobe's next-generation marketing platform to production, powering the relaunch of CMO.com.
+Job5_Highlights: Owned full program lifecycle — product stories, schedules, and quarterly roadmap presentations to VP-level stakeholders|Built the team from zero by hand-selecting top engineers from across existing Adobe teams, establishing culture and process from day one|Launched a fresh platform codebase to production in January 2017, becoming Adobe's modern web architecture foundation|Introduced structured two-week scrum processes and an internal open-source contribution model enabling the full Adobe Web Team to contribute safely|Identified and promoted engineering management talent from within the new team, building a leadership pipeline from scratch
+
+Job6_Title: Senior Engineering Manager, Community Help and Learning Platform
+Job6_Company: Adobe
+Job6_Start: 2004
+Job6_End: 2011
+Job6_Description: Created Adobe's first unified DITA-based authoring and publishing platform, delivering nearly 1M pages across 32 locales with 99.99% uptime.
+Job6_Highlights: Managed program schedules and quarterly roadmaps for all platform releases, presenting to VP stakeholders across Marketing and Engineering|Developed Adobe's first unified authoring and publishing platform using DITA and Structured FrameMaker with centralized X-Hive XML storage|Pioneered Help Viewer applications for macOS and Windows across Creative Suite 3–5 with embedded web views and C-Lucene search|Pioneered AI-driven metadata tagging, introducing intelligent content management ahead of market trends
+
+Job7_Title: Chief Technology Officer
+Job7_Company: CookedSpecially.com
+Job7_Start: 2010
+Job7_End: 2018
+Job7_Description: Served as founder-level CTO, managing full product roadmap and end-to-end technical delivery for a restaurant management platform enabling independent restaurants to compete with major aggregators.
+Job7_Highlights: Built full-stack restaurant management ecosystem covering online ordering, Android POS, and integrated payments|Delivered real-time analytics, order management, and business intelligence dashboards driving operational efficiency|Managed product and engineering end-to-end across an 8-year run as a concurrent role alongside Adobe

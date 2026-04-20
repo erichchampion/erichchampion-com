@@ -1,0 +1,4 @@
+Title: Sell in May
+Description: Sell in May brings institutional-grade market analysis to your iPhone—with zero cloud dependency. Combining advanced pattern recognition with optional LSTM deep learning, it reveals what history suggests about any stock's future under similar market conditions.
+Link: https://apple.co/49vxgrK
+Featured: false

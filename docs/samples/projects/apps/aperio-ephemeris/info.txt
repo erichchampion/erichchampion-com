@@ -1,0 +1,4 @@
+Title: Aperio Ephemeris
+Description: Aperio (Latin for "reveal") is a location-aware astronomical almanac, or ephemeris, that makes important celestial events available to you in an easy-to-browse manner.
+Link: https://apple.co/3OvCtsw
+Featured: false

@@ -1,0 +1,4 @@
+Title: SpotmaticMagic
+Description: SpotmaticMagic brings advanced computational photography to any camera. Import a sequence of images from your device or Photo Library, and apply powerful, desktop-class algorithms like Focus Stacking, HDR Fusion, Astrophotography Stacking, and Motion Removal right on your iPhone, iPad, or Mac.
+Link: https://apple.co/3Mplsj1
+Featured: true

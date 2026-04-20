@@ -1,5 +1,4 @@
 Title: ElectroSpotmatic
-Description: Professional RAW/ProRAW camera app for iOS. Advanced controls for serious photographers who need manual override and high-quality output.
-Link: https://apps.apple.com/your-app-id
-GitHubRepo: erichchampion/electro-spotmatic
+Description: ElectroSpotmatic delivers manual photography on iOS with intuitive rotary controls for ISO, focus, and exposure, designed for one-handed use. Shoot photos in Standard HEIF/JPEG for easy sharing or step up to DNG RAW and ProRAW (on supported devices) for maximum editing latitude. Capture HDR video. Use the light meter mode to meter while using your film camera.
+Link: https://apple.co/3Mplsj1
 Featured: true
