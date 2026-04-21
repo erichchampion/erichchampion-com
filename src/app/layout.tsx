@@ -32,13 +32,8 @@ export const metadata: Metadata = {
   other: {
     "dns-prefetch": "https://api.github.com",
     "preconnect": "https://fonts.gstatic.com",
+    "me": "https://sifa.id/p/erichchampion.com",
   },
-  links: [
-    {
-      rel: "me",
-      href: "https://sifa.id/p/erichchampion.com",
-    },
-  ],
 };
 
 export default function RootLayout({
