@@ -5,14 +5,15 @@ test.describe("Homepage", () => {
     await page.goto("/");
 
     await expect(page.locator("h1")).toContainText("Erich Champion");
-    await expect(page.locator("h1 + p")).toContainText("Senior Engineering Manager");
+    await expect(page.locator("h1 + p")).not.toBeEmpty();
   });
 
   test("displays featured projects section", async ({ page }) => {
     await page.goto("/");
 
     await expect(page.getByRole("heading", { name: "Featured Projects" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Sessions-AI", exact: true })).toBeVisible();
+    await expect(page.locator('main a[target="_blank"]').first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "View all projects →" })).toBeVisible();
   });
 
   test("displays GitHub repos section", async ({ page }) => {

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--openssl-legacy-provider --no-deprecation' next dev",
-    "prebuild": "node scripts/fetch-drive-data.js",
+    "prebuild": "node scripts/fetch-drive-data.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -12,7 +12,7 @@
     "test:unit": "jest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "fetch-data": "node scripts/fetch-drive-data.js"
+    "fetch-data": "node scripts/fetch-drive-data.mjs"
   },
   "dependencies": {
     "dotenv": "^17.4.2",

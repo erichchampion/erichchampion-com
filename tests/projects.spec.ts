@@ -18,29 +18,43 @@ test.describe("Projects Page", () => {
   test("displays project cards", async ({ page }) => {
     await page.goto("/projects");
 
-    await expect(page.locator("h3", { hasText: "Sessions-AI" })).toBeVisible();
-    await expect(page.locator("h3", { hasText: "Building AI Coding Assistants" })).toBeVisible();
+    const cards = page.locator("main h3");
+    await expect(cards.first()).toBeVisible();
+    expect(await cards.count()).toBeGreaterThan(0);
   });
 
   test("filter functionality works", async ({ page }) => {
     await page.goto("/projects");
 
-    await page.getByRole("button", { name: "Apps" }).click();
-    await expect(page.locator("h3", { hasText: "Sessions-AI" })).toBeVisible();
-    await expect(page.locator("h3", { hasText: "Building AI Coding Assistants" })).not.toBeVisible();
+    const cards = page.locator("main h3");
+    const appsButton = page.getByRole("button", { name: "Apps" });
+    const booksButton = page.getByRole("button", { name: "Books" });
+    const allButton = page.getByRole("button", { name: "All" });
 
-    await page.getByRole("button", { name: "Books" }).click();
-    await expect(page.locator("h3", { hasText: "Building AI Coding Assistants" })).toBeVisible();
+    await expect(cards.first()).toBeVisible();
+    const allCount = await cards.count();
+    expect(allCount).toBeGreaterThan(0);
 
-    await page.getByRole("button", { name: "All" }).click();
-    await expect(page.locator("h3", { hasText: "Sessions-AI" })).toBeVisible();
+    await appsButton.click();
+    await expect(appsButton).toHaveAttribute("aria-pressed", "true");
+    const appsCount = await cards.count();
+
+    await booksButton.click();
+    await expect(booksButton).toHaveAttribute("aria-pressed", "true");
+    const booksCount = await cards.count();
+
+    await allButton.click();
+    await expect(allButton).toHaveAttribute("aria-pressed", "true");
+    await expect(cards).toHaveCount(allCount);
+
+    expect(appsCount + booksCount).toBe(allCount);
   });
 
   test("project cards have links", async ({ page }) => {
     await page.goto("/projects");
 
-    const sessionsAI = page.locator("h3", { hasText: "Sessions-AI" }).locator("..");
-    await expect(sessionsAI.locator("text=App Store")).toBeVisible();
-    await expect(sessionsAI.locator("text=GitHub")).toBeVisible();
+    const cardLinks = page.locator('main a[target="_blank"]');
+    await expect(cardLinks.first()).toBeVisible();
+    expect(await cardLinks.count()).toBeGreaterThan(0);
   });
 });

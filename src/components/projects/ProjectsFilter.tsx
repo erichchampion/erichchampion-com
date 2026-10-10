@@ -25,6 +25,7 @@ export function ProjectsFilter({ projects }: { projects: Project[] }) {
           <button
             key={f.value}
             type="button"
+            aria-pressed={filter === f.value}
             onClick={() => setFilter(f.value)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               filter === f.value
