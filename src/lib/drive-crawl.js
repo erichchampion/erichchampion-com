@@ -1,3 +1,7 @@
+/**
+ * @param {string} content
+ * @returns {Record<string, string>}
+ */
 function parseInfoFile(content) {
   const result = {};
   let currentKey = "";
