@@ -12,7 +12,7 @@ test.describe("Homepage", () => {
     await page.goto("/");
 
     await expect(page.getByRole("heading", { name: "Featured Projects" })).toBeVisible();
-    await expect(page.locator("text=Sessions-AI")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Sessions-AI", exact: true })).toBeVisible();
   });
 
   test("displays GitHub repos section", async ({ page }) => {

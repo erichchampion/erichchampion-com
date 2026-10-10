@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--openssl-legacy-provider --no-deprecation' next dev",
+    "prebuild": "node scripts/fetch-drive-data.js",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

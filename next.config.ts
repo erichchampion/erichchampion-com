@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
     ],
     qualities: [50, 75, 90],
   },
+  outputFileTracingIncludes: {
+    "/*": ["./.cache/**"],
+  },
 };
 
 export default nextConfig;
