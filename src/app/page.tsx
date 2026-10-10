@@ -3,17 +3,18 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { RepoCard } from "@/components/github/RepoCard";
 import { fetchGithubRepos } from "@/lib/github";
-import { fetchAbout, fetchProjects } from "@/lib/drive";
+import { fetchAbout, fetchProjects, fetchGithubInfo } from "@/lib/drive";
 import Link from "next/link";
 
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const [about, projects, repos] = await Promise.all([
+  const [about, projects, githubInfo] = await Promise.all([
     fetchAbout(),
     fetchProjects(),
-    fetchGithubRepos(["erichchampion"]),
+    fetchGithubInfo(),
   ]);
+  const repos = await fetchGithubRepos(githubInfo.usernames);
   const featuredRepos = repos.slice(0, 6);
   const featuredProjects = projects.filter((p) => p.featured).slice(0, 6);
 

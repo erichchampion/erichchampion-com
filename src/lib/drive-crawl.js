@@ -63,18 +63,27 @@ function createDriveCrawler({ google }) {
       query += ` and mimeType = '${mimeFilter}'`;
     }
 
-    const response = await drive.files.list({
-      q: query,
-      fields: "files(id, name, mimeType)",
-      pageSize: 100,
-      orderBy: "name",
-    });
+    const files = [];
+    let pageToken;
+    do {
+      const params = {
+        q: query,
+        fields: "files(id, name, mimeType), nextPageToken",
+        pageSize: 100,
+        orderBy: "name",
+      };
+      if (pageToken) {
+        params.pageToken = pageToken;
+      }
+      const response = await drive.files.list(params);
 
-    return (response.data.files || []).map((f) => ({
-      id: f.id,
-      name: f.name,
-      mimeType: f.mimeType,
-    }));
+      for (const f of response.data.files || []) {
+        files.push({ id: f.id, name: f.name, mimeType: f.mimeType });
+      }
+      pageToken = response.data.nextPageToken;
+    } while (pageToken);
+
+    return files;
   }
 
   async function findFolder(parentId, folderName) {
@@ -180,6 +189,7 @@ function createDriveCrawler({ google }) {
               slug: slugify(itemFolder.name),
               title: info.title || itemFolder.name,
               description: info.description || "",
+              /** @type {"app" | "book"} */
               type: type === "apps" ? "app" : "book",
               link: info.link,
               githubRepo: info.githubrepo,

@@ -1,4 +1,4 @@
-import { parseInfoFile } from "../drive";
+import { fetchGithubInfo, getGithubUsernames, parseInfoFile } from "../drive";
 
 describe("parseInfoFile", () => {
   it("parses simple key-value pairs", () => {
@@ -83,5 +83,65 @@ Featured: true`;
     const result = parseInfoFile(input);
 
     expect(result.featured).toBe("true");
+  });
+});
+
+describe("getGithubUsernames", () => {
+  const ORIGINAL_ENV = process.env.GITHUB_USERNAMES;
+
+  afterEach(() => {
+    if (ORIGINAL_ENV === undefined) {
+      delete process.env.GITHUB_USERNAMES;
+    } else {
+      process.env.GITHUB_USERNAMES = ORIGINAL_ENV;
+    }
+  });
+
+  it("defaults to erichchampion when unset", () => {
+    delete process.env.GITHUB_USERNAMES;
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+  });
+
+  it("defaults to erichchampion when empty or blank", () => {
+    process.env.GITHUB_USERNAMES = "";
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+
+    process.env.GITHUB_USERNAMES = "   ";
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+
+    process.env.GITHUB_USERNAMES = " , , ";
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+  });
+
+  it("parses a single username", () => {
+    process.env.GITHUB_USERNAMES = "octocat";
+    expect(getGithubUsernames()).toEqual(["octocat"]);
+  });
+
+  it("parses comma-separated usernames and trims whitespace", () => {
+    process.env.GITHUB_USERNAMES = "erichchampion, octocat ,torvalds";
+    expect(getGithubUsernames()).toEqual([
+      "erichchampion",
+      "octocat",
+      "torvalds",
+    ]);
+  });
+
+  it("drops empty entries", () => {
+    process.env.GITHUB_USERNAMES = "erichchampion,,octocat,";
+    expect(getGithubUsernames()).toEqual(["erichchampion", "octocat"]);
+  });
+});
+
+describe("fetchGithubInfo", () => {
+  it("returns the configured usernames", async () => {
+    process.env.GITHUB_USERNAMES = "erichchampion,octocat";
+    try {
+      await expect(fetchGithubInfo()).resolves.toEqual({
+        usernames: ["erichchampion", "octocat"],
+      });
+    } finally {
+      delete process.env.GITHUB_USERNAMES;
+    }
   });
 });
