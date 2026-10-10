@@ -87,4 +87,38 @@ describe("fetchGithubRepos", () => {
 
     expect(repos.map((r) => r.name)).toEqual(["repo"]);
   });
+
+  it("follows pagination when a user has more than one page of repos", async () => {
+    const requestedPages: string[] = [];
+    mockFetch(async (url: string) => {
+      requestedPages.push(url);
+      if (new URL(url).searchParams.get("page") === "1") {
+        return {
+          ok: true,
+          json: async () =>
+            Array.from({ length: 100 }, (_, i) =>
+              apiRepo("alice", `repo-${i}`, {
+                updated_at: "2026-01-01T00:00:00Z",
+              })
+            ),
+        };
+      }
+      return {
+        ok: true,
+        json: async () => [
+          apiRepo("alice", "repo-old", {
+            updated_at: "2020-01-01T00:00:00Z",
+          }),
+        ],
+      };
+    });
+
+    const repos = await fetchGithubRepos(["alice"]);
+
+    expect(requestedPages).toHaveLength(2);
+    expect(requestedPages[0]).toContain("page=1");
+    expect(requestedPages[1]).toContain("page=2");
+    expect(repos).toHaveLength(101);
+    expect(repos[repos.length - 1].name).toBe("repo-old");
+  });
 });
