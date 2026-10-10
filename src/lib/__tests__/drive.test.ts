@@ -1,4 +1,14 @@
-import { parseInfoFile } from "../drive";
+import { fetchGithubInfo, getGithubUsernames, parseInfoFile } from "../drive";
+
+const ORIGINAL_GITHUB_USERNAMES = process.env.GITHUB_USERNAMES;
+
+afterEach(() => {
+  if (ORIGINAL_GITHUB_USERNAMES === undefined) {
+    delete process.env.GITHUB_USERNAMES;
+  } else {
+    process.env.GITHUB_USERNAMES = ORIGINAL_GITHUB_USERNAMES;
+  }
+});
 
 describe("parseInfoFile", () => {
   it("parses simple key-value pairs", () => {
@@ -83,5 +93,62 @@ Featured: true`;
     const result = parseInfoFile(input);
 
     expect(result.featured).toBe("true");
+  });
+});
+
+describe("getGithubUsernames", () => {
+  it("defaults to erichchampion when unset", () => {
+    delete process.env.GITHUB_USERNAMES;
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+  });
+
+  it("defaults to erichchampion when empty or blank", () => {
+    process.env.GITHUB_USERNAMES = "";
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+
+    process.env.GITHUB_USERNAMES = "   ";
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+
+    process.env.GITHUB_USERNAMES = " , , ";
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+  });
+
+  it("parses a single username", () => {
+    process.env.GITHUB_USERNAMES = "octocat";
+    expect(getGithubUsernames()).toEqual(["octocat"]);
+  });
+
+  it("parses comma-separated usernames and trims whitespace", () => {
+    process.env.GITHUB_USERNAMES = "erichchampion, octocat ,torvalds";
+    expect(getGithubUsernames()).toEqual([
+      "erichchampion",
+      "octocat",
+      "torvalds",
+    ]);
+  });
+
+  it("drops empty entries", () => {
+    process.env.GITHUB_USERNAMES = "erichchampion,,octocat,";
+    expect(getGithubUsernames()).toEqual(["erichchampion", "octocat"]);
+  });
+
+  it("deduplicates repeat usernames", () => {
+    process.env.GITHUB_USERNAMES = "octocat,erichchampion,Octocat,OCTOCAT";
+    expect(getGithubUsernames()).toEqual(["octocat", "erichchampion"]);
+  });
+
+  it("returns a fresh array on each call", () => {
+    delete process.env.GITHUB_USERNAMES;
+    getGithubUsernames().push("mutant");
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+  });
+});
+
+describe("fetchGithubInfo", () => {
+  it("returns the configured usernames", async () => {
+    process.env.GITHUB_USERNAMES = "erichchampion,octocat";
+    await expect(fetchGithubInfo()).resolves.toEqual({
+      usernames: ["erichchampion", "octocat"],
+    });
   });
 });

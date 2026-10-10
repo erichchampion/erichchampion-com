@@ -81,6 +81,24 @@ export async function fetchProjects(): Promise<Project[]> {
   return getCachedData()?.projects ?? mockProjects;
 }
 
-export async function fetchGithubInfo(): Promise<GithubInfo | null> {
-  return { usernames: ["erichchampion"] };
+const DEFAULT_GITHUB_USERNAMES = ["erichchampion"];
+
+export function getGithubUsernames(): string[] {
+  const raw = process.env.GITHUB_USERNAMES;
+  if (!raw) return [...DEFAULT_GITHUB_USERNAMES];
+  const seen = new Set<string>();
+  const usernames: string[] = [];
+  for (const entry of raw.split(",")) {
+    const username = entry.trim();
+    const key = username.toLowerCase();
+    if (username && !seen.has(key)) {
+      seen.add(key);
+      usernames.push(username);
+    }
+  }
+  return usernames.length > 0 ? usernames : [...DEFAULT_GITHUB_USERNAMES];
+}
+
+export async function fetchGithubInfo(): Promise<GithubInfo> {
+  return { usernames: getGithubUsernames() };
 }

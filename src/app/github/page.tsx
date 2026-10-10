@@ -1,11 +1,13 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RepoCard } from "@/components/github/RepoCard";
 import { fetchGithubRepos } from "@/lib/github";
+import { fetchGithubInfo } from "@/lib/drive";
 
 export const revalidate = 3600;
 
 export default async function GithubPage() {
-  const repos = await fetchGithubRepos(["erichchampion"]);
+  const githubInfo = await fetchGithubInfo();
+  const repos = await fetchGithubRepos(githubInfo.usernames);
 
   const totalStars = repos.reduce((sum, repo) => sum + repo.stars, 0);
   const languages = [...new Set(repos.map((r) => r.language).filter(Boolean))];

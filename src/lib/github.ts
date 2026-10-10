@@ -1,6 +1,8 @@
 import type { GithubRepo } from "./types";
 import { REVALIDATE_SECONDS } from "./cache";
 
+const GITHUB_PER_PAGE = 100;
+
 interface GithubApiRepo {
   id: number;
   name: string;
@@ -27,39 +29,45 @@ export async function fetchGithubRepos(usernames: string[]): Promise<GithubRepo[
       headers.Authorization = `token ${token}`;
     }
 
-    const response = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=updated&per_page=50`,
-      {
-        headers,
-        next: { revalidate: REVALIDATE_SECONDS },
+    let page = 1;
+    for (;;) {
+      const response = await fetch(
+        `https://api.github.com/users/${username}/repos?sort=updated&per_page=${GITHUB_PER_PAGE}&page=${page}`,
+        {
+          headers,
+          next: { revalidate: REVALIDATE_SECONDS },
+        }
+      );
+
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error(`Failed to fetch repos for ${username}: ${response.status} - ${errorBody}`);
+        break;
       }
-    );
 
-    if (!response.ok) {
-      const errorBody = await response.text();
-      console.error(`Failed to fetch repos for ${username}: ${response.status} - ${errorBody}`);
-      continue;
+      const data = (await response.json()) as GithubApiRepo[];
+
+      const userRepos = data
+        .filter((repo) => !repo.fork)
+        .map((repo) => ({
+          id: repo.id,
+          name: repo.name,
+          fullName: repo.full_name,
+          description: repo.description,
+          htmlUrl: repo.html_url,
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+          language: repo.language,
+          fork: repo.fork,
+          topics: repo.topics || [],
+          updatedAt: repo.updated_at,
+        }));
+
+      repos.push(...userRepos);
+
+      if (data.length < GITHUB_PER_PAGE) break;
+      page += 1;
     }
-
-    const data = await response.json();
-
-    const userRepos = (data as GithubApiRepo[])
-      .filter((repo) => !repo.fork)
-      .map((repo) => ({
-        id: repo.id,
-        name: repo.name,
-        fullName: repo.full_name,
-        description: repo.description,
-        htmlUrl: repo.html_url,
-        stars: repo.stargazers_count,
-        forks: repo.forks_count,
-        language: repo.language,
-        fork: repo.fork,
-        topics: repo.topics || [],
-        updatedAt: repo.updated_at,
-      }));
-
-    repos.push(...userRepos);
   }
 
   return repos.sort(
