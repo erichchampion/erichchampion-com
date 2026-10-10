@@ -1,4 +1,5 @@
 import type { GithubRepo } from "./types";
+import { REVALIDATE_SECONDS } from "./cache";
 
 interface GithubApiRepo {
   id: number;
@@ -30,7 +31,7 @@ export async function fetchGithubRepos(usernames: string[]): Promise<GithubRepo[
       `https://api.github.com/users/${username}/repos?sort=updated&per_page=50`,
       {
         headers,
-        next: { revalidate: 3600 },
+        next: { revalidate: REVALIDATE_SECONDS },
       }
     );
 

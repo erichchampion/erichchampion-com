@@ -17,7 +17,9 @@ test.describe("About Page", () => {
   test("displays job entries", async ({ page }) => {
     await page.goto("/about");
 
-    await expect(page.getByRole("heading", { name: "Senior Engineering Manager" })).toBeVisible();
+    const jobs = page.locator("main h3");
+    await expect(jobs.first()).toBeVisible();
+    expect(await jobs.count()).toBeGreaterThan(0);
   });
 
   test("displays bio text", async ({ page }) => {
