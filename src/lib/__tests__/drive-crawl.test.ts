@@ -51,6 +51,7 @@ describe("crawlAbout pagination", () => {
         .mockReturnValue({ files: { list: listMock, get: getMock } }),
     };
 
+    const originalFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
     process.env.GOOGLE_DRIVE_FOLDER_ID = "root";
     try {
       const { crawlAbout } = createDriveCrawler({ google: fakeGoogle });
@@ -64,7 +65,11 @@ describe("crawlAbout pagination", () => {
       expect(aboutListCalls[0].fields).toContain("nextPageToken");
       expect(aboutListCalls[1].pageToken).toBe("token-2");
     } finally {
-      delete process.env.GOOGLE_DRIVE_FOLDER_ID;
+      if (originalFolderId === undefined) {
+        delete process.env.GOOGLE_DRIVE_FOLDER_ID;
+      } else {
+        process.env.GOOGLE_DRIVE_FOLDER_ID = originalFolderId;
+      }
     }
   });
 });

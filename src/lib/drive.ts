@@ -85,12 +85,18 @@ const DEFAULT_GITHUB_USERNAMES = ["erichchampion"];
 
 export function getGithubUsernames(): string[] {
   const raw = process.env.GITHUB_USERNAMES;
-  if (!raw) return DEFAULT_GITHUB_USERNAMES;
-  const usernames = raw
-    .split(",")
-    .map((u) => u.trim())
-    .filter(Boolean);
-  return usernames.length > 0 ? usernames : DEFAULT_GITHUB_USERNAMES;
+  if (!raw) return [...DEFAULT_GITHUB_USERNAMES];
+  const seen = new Set<string>();
+  const usernames: string[] = [];
+  for (const entry of raw.split(",")) {
+    const username = entry.trim();
+    const key = username.toLowerCase();
+    if (username && !seen.has(key)) {
+      seen.add(key);
+      usernames.push(username);
+    }
+  }
+  return usernames.length > 0 ? usernames : [...DEFAULT_GITHUB_USERNAMES];
 }
 
 export async function fetchGithubInfo(): Promise<GithubInfo> {

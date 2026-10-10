@@ -1,5 +1,15 @@
 import { fetchGithubInfo, getGithubUsernames, parseInfoFile } from "../drive";
 
+const ORIGINAL_GITHUB_USERNAMES = process.env.GITHUB_USERNAMES;
+
+afterEach(() => {
+  if (ORIGINAL_GITHUB_USERNAMES === undefined) {
+    delete process.env.GITHUB_USERNAMES;
+  } else {
+    process.env.GITHUB_USERNAMES = ORIGINAL_GITHUB_USERNAMES;
+  }
+});
+
 describe("parseInfoFile", () => {
   it("parses simple key-value pairs", () => {
     const input = `Name: John Doe
@@ -87,16 +97,6 @@ Featured: true`;
 });
 
 describe("getGithubUsernames", () => {
-  const ORIGINAL_ENV = process.env.GITHUB_USERNAMES;
-
-  afterEach(() => {
-    if (ORIGINAL_ENV === undefined) {
-      delete process.env.GITHUB_USERNAMES;
-    } else {
-      process.env.GITHUB_USERNAMES = ORIGINAL_ENV;
-    }
-  });
-
   it("defaults to erichchampion when unset", () => {
     delete process.env.GITHUB_USERNAMES;
     expect(getGithubUsernames()).toEqual(["erichchampion"]);
@@ -131,17 +131,24 @@ describe("getGithubUsernames", () => {
     process.env.GITHUB_USERNAMES = "erichchampion,,octocat,";
     expect(getGithubUsernames()).toEqual(["erichchampion", "octocat"]);
   });
+
+  it("deduplicates repeat usernames", () => {
+    process.env.GITHUB_USERNAMES = "octocat,erichchampion,Octocat,OCTOCAT";
+    expect(getGithubUsernames()).toEqual(["octocat", "erichchampion"]);
+  });
+
+  it("returns a fresh array on each call", () => {
+    delete process.env.GITHUB_USERNAMES;
+    getGithubUsernames().push("mutant");
+    expect(getGithubUsernames()).toEqual(["erichchampion"]);
+  });
 });
 
 describe("fetchGithubInfo", () => {
   it("returns the configured usernames", async () => {
     process.env.GITHUB_USERNAMES = "erichchampion,octocat";
-    try {
-      await expect(fetchGithubInfo()).resolves.toEqual({
-        usernames: ["erichchampion", "octocat"],
-      });
-    } finally {
-      delete process.env.GITHUB_USERNAMES;
-    }
+    await expect(fetchGithubInfo()).resolves.toEqual({
+      usernames: ["erichchampion", "octocat"],
+    });
   });
 });

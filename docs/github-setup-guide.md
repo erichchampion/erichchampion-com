@@ -78,6 +78,7 @@ If the GitHub page still shows 0 repos after adding a token:
 2. **Verify the token is set** - redeploy and check environment
 3. **Check token permissions** - ensure no scopes are selected (public read-only)
 4. **Rate limit may still apply** - wait an hour if previously rate limited
+5. **Check `GITHUB_USERNAMES`** - a misspelled username returns 404 and is silently skipped, leaving 0 repos; use comma-separated GitHub logins (surrounding whitespace is ignored)
 
 To debug locally:
 
